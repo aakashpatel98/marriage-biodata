@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marriage BioData</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(120deg, #f3f4f6, #ffffff);
+            text-align: center;
+            transition: 0.3s;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .profile img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid #e91e63;
+        }
+
+        .profile h1 {
+            font-size: 24px;
+            margin: 10px 0;
+            color: #e91e63;
+        }
+
+        .info {
+            text-align: left;
+            padding: 10px;
+        }
+
+        .info h2 {
+            background: #e91e63;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        .info p {
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #e91e63;
+            font-weight: bold;
+        }
+
+        .btn {
+            background: #e91e63;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: #c2185b;
+            transform: scale(1.05);
+        }
+
+        /* Dark Mode */
+        .dark-mode {
+            background: #1e1e1e;
+            color: white;
+        }
+
+        .dark-mode .card {
+            background: #2c2c2c;
+            box-shadow: none;
+        }
+
+        .dark-mode .btn {
+            background: #ff9800;
+        }
+
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            font-size: 24px;
+            color: #e91e63;
+        }
+
+        .dark-mode .theme-toggle i {
+            color: #ff9800;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Dark Mode Toggle -->
+    <div class="theme-toggle">
+        <i class="fas fa-sun" id="toggleDark"></i>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <div class="profile">
+                <img src="profile.jpg" alt="Profile Picture">
+                <h1>Aakash SunilBhai Patel</h1>
+                <p>Looking for a Life Partner ❤️</p>
+            </div>
+
+            <div class="info" id="biodata">
+                <h2>Basic Details</h2>
+                <p><strong>Full Name:</strong> Aakash SunilBhai Patel</p>
+                <p><strong>Date of Birth:</strong> 03/11/1998</p>
+                <p><strong>Place of Birth:</strong> Visnagar</p>
+                <p><strong>Native:</strong> Palasar </p>
+                <p><strong>Mosal:</strong> Umta </p>
+                <p><strong>Height:</strong> 5'11" (180 cm)</p>
+                <p><strong>Weight:</strong> 70 KG </p>
+                <p><strong>Complexion:</strong> Fair </p>
+                <p><strong>Religion:</strong> Hindu</p>
+                <p><strong>Mother Tongue:</strong> Gujarati</p>
+                <p><strong>Hobbies:</strong> Writing, Gyming, Trekking.</p>
+
+                <h2>Education & Career</h2>
+                <p><strong>Degree:</strong> B.E. in Electronics and Tele-communication Engineering</p>
+                <p><strong>Profession:</strong> Senior Software Engineer</p>
+                <p><strong>Company:</strong> LTIMINDTREE(Larsen and Toubro Infotech- L & T)</p>
+
+                <h2>Family Details</h2>
+                <p><strong>Father's Name:</strong> Sunilbhai Bhagubhai Patel</p>
+                <p><strong>Father's Occupation:</strong> Goverment Servant- Indian Meterological Department (IMD) </p>
+                <p><strong>Father's Contact:</strong> 7021233623</p>
+                <p><strong>Mother's Name:</strong> Kumudben Sunibhal Patel</p>
+                <p><strong>Mother's Occupation:</strong> HouseWife</p>
+                <p><strong>Sister's Name:</strong> Margi Sunilbhai Patel - Studying B.D.S- 4TH YEAR</p>
+
+                <h2>Contact Information</h2>
+                <p><strong>Residential address:</strong> </p>
+                <p><strong>Email:</strong> aakashptl98@gmail.com</p>
+                <p><strong>Phone:</strong> +91 9076201124</p>
+                <p><a href="www.linkedin.com/in/aakash-patel-8b8ab718b" target="_blank">LinkedIn</a></p>
+                <p><a href="https://www.instagram.com/aakashptl/" target="_blank">Instagram</a></p>
+            </div>
+
+            <!-- Download PDF Button -->
+            <button class="btn" onclick="downloadBiodata()">Download as PDF</button>
+        </div>
+    </div>
+
+    <script>
+        // Animate Cards on Load
+        document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(() => {
+                document.querySelector(".card").classList.add("show");
+            }, 300);
+        });
+
+        // Function to Download Biodata as PDF
+        function downloadBiodata() {
+            const element = document.getElementById('biodata');
+            html2pdf().from(element).save('Marriage_Biodata.pdf');
+        }
+
+        // Dark Mode Toggle
+        const toggleDark = document.getElementById('toggleDark');
+        toggleDark.addEventListener('click', function () {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
+
+</body>
+</html>
